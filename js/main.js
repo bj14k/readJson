@@ -2,17 +2,21 @@
 
 function styleJson(key,value) {
     value = typeof value !== 'undefined' ? value : '';
-    return `<div>${key}: ${value}</div>`;
+    return `<li class="dropdown">
+                <a data-toggle="dropdown">${key}</a>
+                <ul class="dropdown-element hide">
+                    <li>${value}</li> 
+                </ul>
+            </li>`;
 }
 
 function formatJson(element) {
     var result = '';
-
+    
     forEach(element, (key, value) => {
-        console.log(key, value)
         if( typeof value == 'object' ) {
             if(Array.isArray(value)) {
-                result += styleJson(key) + formatJson(value);
+                result += styleJson(`${key} (${value.length})`,formatJson(value));
             } else {
                 result +=  styleJson(key,formatJson(value));
             }
@@ -20,7 +24,7 @@ function formatJson(element) {
             result += styleJson(key,value);
         }
     })
-
+    
     return result;
 }
 
@@ -41,6 +45,8 @@ function parseJson() {
 
     isJson(stringJson, (err,json) => {
         if(err) { throw err; }
-        output.innerHTML = formatJson(json); 
+        var template = `<ul>${formatJson(json)}</ul>`;
+        output.innerHTML = template; 
+        initDropdowns();
     });
 }
