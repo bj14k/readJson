@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="css/style.css"></link>
     <link rel="stylesheet" type="text/css" href="css/dropdown.css"></link>
+    <script type="text/javascript" src="js/collection.js"></script>
     <script type="text/javascript" src="js/dropdown.js"></script>
-    <script type="text/javascript" src="js/arraysandobjects.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/json.js"></script>
     <title>JSON reader</title>
 </head>
+
 <body>
     <div class="title">JSON reader</div>
     <div class="content">
-        <textarea id="input" class="section-1" type="text" placeholder="Input JSON here."></textarea>
-        <input class="btn" type="submit" value="Convert" onclick="parseJson()">
+        <textarea id="input" class="section-1" type="text" placeholder="Input JSON here..."></textarea>
+        <input class="btn" type="submit" value="Convert" onclick="app.json.parse()">
         <div class="section-2" id="output">
 
         </div>
     </div>
 </body>
+
 </html>
