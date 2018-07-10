@@ -1,23 +1,31 @@
-'use strict'
+var app = window.app = window.app || {};
 
-function initDropdowns() {
-	var dropdowns = document.getElementsByClassName('dropdown')
-	forEach(dropdowns,(i, dropdown) => {
-		var button = dropdown.querySelector('a[data-toggle="dropdown"]');
-		var element = dropdown.querySelector('.dropdown-element');
-		button.onclick = function(event) {
-			if(!element.hasClass('show')) {
-				element.classList.add('show');
-				element.classList.remove('hide');
-			}
-			else {
-				element.classList.remove('show');
-				element.classList.add('hide');
-			}
-		}
-	})
-}
+var forEach = app.collection.forEach;
 
-Element.prototype.hasClass = function(className) {
-    return this.className && new RegExp("(^|\\s)" + className + "(\\s|$)").test(this.className);
-};
+app.dropdown = (function () {
+	var hasClass = function (element, className) {
+		return element.className && new RegExp("(^|\\s)" + className + "(\\s|$)").test(element.className);
+	};
+
+	var initDropdowns = function () {
+		var dropdowns = document.getElementsByClassName('dropdown')
+		forEach(dropdowns, (i, dropdown) => {
+			var button = dropdown.querySelector('a[data-toggle="dropdown"]');
+			var element = dropdown.querySelector('.dropdown-element');
+			button.onclick = function (event) {
+				if (!hasClass(element, 'show')) {
+					element.classList.add('show');
+					element.classList.remove('hide');
+				}
+				else {
+					element.classList.remove('show');
+					element.classList.add('hide');
+				}
+			}
+		})
+	};
+
+	return {
+		init: initDropdowns
+	};
+})();
